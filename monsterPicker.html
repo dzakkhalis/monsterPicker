@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <description>Monster PIcker</description>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Monster Picker</h1>
+  <p>Select which of the two presented options is most like Apophan. There is no wrong answer. You can base it off appearance or description.</p> 
+</div>
+  
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div id="victorBlock">
+                <h1 id="victorName"></h3>
+                <p id="victorDescription"></p><img id="victorImg" src="" width="100%" /></div>
+        </div>
+    </div>
+        <div class="row">
+    <div class="col-sm-6">
+        <div id="leftBlock" onclick="monsterPicker('left')">
+      <p id="leftDescription"></p><img id="leftImg" src="" width="100%" /></div>
+    </div>
+    <div class="col-sm-6">
+        <div id="rightBlock" onclick="monsterPicker('right')">
+      <p id="rightDescription"></p><img id="rightImg" src="" width="100%"  /></div>
+    </div>
+  </div>
+</div>
+
+<script>
+    const monsters = [
+        {
+            name: 'Vadrok',
+            description: 'Reuses quick spells',
+            img: 'https://gamepedia.cursecdn.com/mtgsalvation_gamepedia/5/57/Vadrok.png'
+        },
+        {
+            name: 'Brokkos',
+            description: 'Keeps coming back from death',
+            img:  'https://www.hipstersofthecoast.com/wp-content/uploads/2020/05/3.Brokkos.jpg'
+        },
+        {
+            name: 'Snapdax',
+            description: 'Zaps enemies and hits like a truck',
+            img: 'https://www.mtgnexus.com/img/gallery/2843-snapdax-apex-of-the-hunt.jpg'
+        },
+        {
+            name: 'Iluna',
+            description: 'Brings other things into reality',
+            img: 'https://i0.wp.com/mtgazone.com/wp-content/uploads/2020/04/Illuna-Apex-of-Wishes-Art-by-Chris-Rahn.jpg?fit=675%2C680&ssl=1'
+        },
+        {
+            name: 'Nethroi',
+            description: 'Brings lots of little minions back from the dead',
+            img: 'https://www.mtgnexus.com/img/gallery/2728-nethroi-apex-of-death-mobile.jpg'
+        },
+        {
+            name: 'Otrimi',
+            description: 'Constantly pops up and refuses to stay down',
+            img: 'https://cdn.shopify.com/s/files/1/1601/3103/products/VAM-Otrimi_theever-playful_5000x.jpg?v=1603717257'
+        },
+        {
+            name: "Malfegor",
+            description: 'Nukes enemy armies',
+            img: 'https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/c/c7/Malfegor.jpg/revision/latest?cb=20110429224341'
+        },
+        {
+            name: 'Gyruda',
+            description: 'Dumps a bunch of creatures into death and summons one',
+            img: 'https://storage.googleapis.com/scg-static/articles/2020/04/8f40cce0-gyruda.jpg'
+        },
+        {
+            name: 'Kalamax',
+            description: 'Copies quick spells repeatedly and gets bigger from it',
+            img: 'https://media.wizards.com/2020/images/daily/B96ow8EXW4.jpg'
+        },
+        {
+            name: 'Kathril',
+            description: 'Uses the dead to boost himself and living allies',
+            img: 'https://cdn.shopify.com/s/files/1/1601/3103/products/Kathril_Aspect_Warper_1200x.jpg?v=1603773593'
+        },
+        {
+            name: 'Yurlok',
+            description: 'Gives everyone energy... and if they don\'t spend it, they burn',
+            img: 'https://www.mtgnexus.com/img/gallery/6005-yurlok-of-scorch-thrash.jpg'
+        },
+        {
+            name: "Xyris",
+            description: 'Smacks someone, gives them and himself resources, then spits out snakes',
+            img: 'https://ixonline.b-cdn.net/images/exhibitor/303_pYmvHb_191020064133.jpg'
+        },
+        {
+            name: 'Zaxara',
+            description: 'Constantly summons hydras',
+            img: 'https://lh3.googleusercontent.com/proxy/jeCXTCFcjYp0Ky7o73kX4ozlbs-GR7T9tf5GpNJRyurI9Yxv6DrCB3Al0zMTMYQjNgr1UAeDkU9gSEbhKJx3nwhplWvkaSv0ZyNEm1BCP_dXewx2Ct5dUvwPd61JhswpoVE3qHhIN5Xr6YyTMpFh6BDRScQLdrKcxheKlyCWh9t7VQ'
+        },
+        {
+            name: 'Kardur',
+            description: 'Makes everyone attack each other, if someone attacking dies, everyone gets hurt.',
+            img: 'https://lh3.googleusercontent.com/proxy/2wd24_y98AHPlutoFcstAnzqXHCDYxRnS6NV1kC3xC6b4HmgP6wxsAJPCKlqWqlATCy6UBtAXk4KkbkoYngq0UHtLZCZ2Kl9S38iZNTxCrbLO5F0rrLDQ2-aTMeP-FPMfR-umwLb3518Tr-xLCgU7q56'
+        },
+        {
+            name: 'Crosis',
+            description: 'When he hits someone, he can make them forget things.',
+            img: 'https://cdn.inprnt.com/thumbs/f5/90/f590cfc05ac98b9dea15b40dfa4d56bb.jpg?response-cache-control=max-age=2628000'
+        },
+        {
+            name: 'Vaevictis Asmadi',
+            description: 'Transforms things into new things by blowing them up',
+            img: 'https://cdn.inprnt.com/thumbs/31/6e/316e89f3cb31c75d611081cca1471304.jpg?response-cache-control=max-age=2628000'
+        },
+        {
+            name: 'Thraximundar',
+            description: 'Gets stronger when things die and eats an enemy when he attacks',
+            img: 'https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/e/e4/Thraximundar.jpg/revision/latest?cb=20171203031556'
+        },
+        {
+            name: 'O-Kagachi',
+            description: 'When he hits someone who previously hit him, he erases one of their allies or useful items',
+            img: 'https://cdn.inprnt.com/thumbs/ba/5e/ba5e6bea74a82f2ed393783969f0daeb.jpg?response-cache-control=max-age=2628000'
+        },
+        {
+            name: 'Yidris',
+            description: 'When he hits an enemy, he randomly casts a spell',
+            img: 'https://64.media.tumblr.com/002843132023aab1966de75f29199145/tumblr_ofptnhY7CZ1u9beo8o1_1280.jpg'
+        },
+    ];
+
+    let leftMonster, rightMonster;
+    function monsterPicker(leftOrRight) {
+        if (leftOrRight === 'right' || leftOrRight === undefined) {
+            if (monsters.length > 0) {
+                leftMonster =  randomMonster();
+                document.getElementById('leftDescription').textContent = leftMonster.description;
+                document.getElementById('leftImg').src = leftMonster.img;
+            } else {
+                finish(rightMonster);
+            }
+        }
+        if (leftOrRight === 'left' || leftOrRight === undefined) {
+            if (monsters.length > 0) {
+                rightMonster =  randomMonster();
+                document.getElementById('rightDescription').textContent = rightMonster.description;
+                document.getElementById('rightImg').src = rightMonster.img;
+            } else {
+                finish(leftMonster);
+            }
+        }
+        
+    };
+    function randomMonster() {
+        const rand = monsters[Math.floor(Math.random() * monsters.length)];
+        removeItemOnce(monsters, rand)
+        console.log(monsters)
+        return rand;
+        
+    };
+    function removeItemOnce(arr, value) {
+        var index = arr.indexOf(value);
+        if (index > -1) {
+            arr.splice(index, 1);
+        }
+        return arr;
+        }
+    function finish(victor) {
+        document.getElementById('leftDescription').textContent = '';
+        document.getElementById('leftImg').src = '';
+        document.getElementById('rightDescription').textContent = '';
+        document.getElementById('rightImg').src = '';
+        document.getElementById('victorName').textContent = victor.name;
+        document.getElementById('victorDescription').textContent = victor.description;
+        document.getElementById('victorImg').src = victor.img;
+    }
+    monsterPicker();
+
+</script>
+
+</body>
+</html>
